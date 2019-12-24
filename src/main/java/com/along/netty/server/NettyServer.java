@@ -35,24 +35,21 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        // ch.pipeline().addLast(new ServerHandler());
                         ch.pipeline().addLast(new Spliter());
-                        //解码
-                        ch.pipeline().addLast(new PacketDecoder());
+                        //解码+编码
+                        ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
                         //登陆
-                        ch.pipeline().addLast(new LoginReqHandler());
+                        ch.pipeline().addLast(LoginReqHandler.INSTANCE);
                         //鉴权
-                        ch.pipeline().addLast(new AuthHandler());
+                        ch.pipeline().addLast(AuthHandler.INSTANCE);
                         //退出登陆
-                        ch.pipeline().addLast(new LogoutReqHandler());
+                        ch.pipeline().addLast(LogoutReqHandler.INSTANCE);
                         //消息处理
-                        ch.pipeline().addLast(new SendMessageReqHandler());
+                        ch.pipeline().addLast(SendMessageReqHandler.INSTANCE);
                         //创建群
-                        ch.pipeline().addLast(new CreateGroupReqHandler());
+                        ch.pipeline().addLast(CreateGroupReqHandler.INSTANCE);
                         //发群消息
-                        ch.pipeline().addLast(new SendGroupMessageReqHandler());
-                        //编码
-                        ch.pipeline().addLast(new PacketEncoder());
+                        ch.pipeline().addLast(SendGroupMessageReqHandler.INSTANCE);
                     }
                 });
         bind(serverBootstrap, PORT);

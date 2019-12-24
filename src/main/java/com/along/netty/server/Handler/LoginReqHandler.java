@@ -15,8 +15,12 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @author huanglong
  * @date 2019-12-25
  */
+@ChannelHandler.Sharable
 public class LoginReqHandler extends SimpleChannelInboundHandler<LoginReqPacket> {
 
+    public static final LoginReqHandler INSTANCE = new LoginReqHandler();
+
+    private LoginReqHandler() {}
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginReqPacket loginReqPacket) throws Exception {

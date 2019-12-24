@@ -9,7 +9,12 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  * @author huanglong
  * @date 2019-12-25
  */
+@ChannelHandler.Sharable
 public class AuthHandler extends ChannelInboundHandlerAdapter {
+
+    public static final AuthHandler INSTANCE = new AuthHandler();
+
+    private AuthHandler() {}
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
