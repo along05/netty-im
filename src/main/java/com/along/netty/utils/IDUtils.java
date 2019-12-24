@@ -15,4 +15,11 @@ public class IDUtils {
         return UUID.randomUUID().toString().substring(0 , 4);
     }
 
+    /**
+     * 获取群组id
+     */
+    public static String getGroupId(){
+        return UUID.randomUUID().toString().substring(0,6) ;
+    }
+
 }

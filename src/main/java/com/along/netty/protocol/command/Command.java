@@ -18,4 +18,13 @@ public interface Command {
 
     byte LOGOUT_RESPONSE = 6;
 
+    byte CREATE_GROUP_REQ = 7;
+
+    byte CREATE_GROUP_RESP = 8;
+
+    byte SEND_GROUP_MESSAGE_REQ = 9;
+
+    byte SEND_GROUP_MESSAGE_RESP = 10;
+
+
 }

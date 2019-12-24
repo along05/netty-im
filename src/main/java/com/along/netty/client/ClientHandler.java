@@ -2,10 +2,9 @@ package com.along.netty.client;
 
 import com.along.netty.protocol.Packet;
 import com.along.netty.protocol.PacketCodeC;
+import com.along.netty.protocol.request.CreateGroupReqPacket;
 import com.along.netty.protocol.request.LoginReqPacket;
-import com.along.netty.protocol.response.LoginRespPacket;
-import com.along.netty.protocol.response.LogoutResponsePacket;
-import com.along.netty.protocol.response.SendMessageRespPacket;
+import com.along.netty.protocol.response.*;
 import com.along.netty.session.Session;
 import com.along.netty.utils.SessionUtils;
 import io.netty.buffer.ByteBuf;
@@ -56,8 +55,21 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
                     + sendMessageRespPacket.getMessage());
         }
 
+        //处理群创建
+        if (packet instanceof CreateGroupRespPacket){
+            CreateGroupRespPacket createGroupRespPacket = (CreateGroupRespPacket) packet ;
+            System.out.println("【群创建】成功，id为【"
+                    +createGroupRespPacket.getGroupId()+"】，群成员有"
+                    +createGroupRespPacket.getUserNameList());
+        }
 
+        //处理群消息
+        if (packet instanceof SendGroupMessageRespPacket){
+            SendGroupMessageRespPacket sendGroupMessageRespPacket = (SendGroupMessageRespPacket) packet ;
+            String groupId = sendGroupMessageRespPacket.getGroupId() ;
+            String message = sendGroupMessageRespPacket.getMessage() ;
+            System.out.println("来自群【"+groupId+"】消息："+message);
+        }
     }
-
 
 }

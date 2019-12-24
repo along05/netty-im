@@ -1,11 +1,8 @@
 package com.along.netty.protocol;
 
 import com.along.netty.protocol.command.Command;
-import com.along.netty.protocol.request.LoginReqPacket;
-import com.along.netty.protocol.request.LogoutReqPacket;
-import com.along.netty.protocol.request.SendMessageReqPacket;
-import com.along.netty.protocol.response.LoginRespPacket;
-import com.along.netty.protocol.response.SendMessageRespPacket;
+import com.along.netty.protocol.request.*;
+import com.along.netty.protocol.response.*;
 import com.along.netty.serialize.SerializeAlgorithm;
 import com.along.netty.serialize.Serializer;
 import com.along.netty.serialize.impl.JSONSerializer;
@@ -42,7 +39,11 @@ public class PacketCodeC {
         packetMap.put(Command.SEND_MESSAGE_REQUEST, SendMessageReqPacket.class);
         packetMap.put(Command.SEND_MESSAGE_RESPONSE, SendMessageRespPacket.class);
         packetMap.put(Command.LOGOUT_REQUEST, LogoutReqPacket.class);
-        packetMap.put(Command.LOGIN_RESPONSE, LoginRespPacket.class);
+        packetMap.put(Command.LOGOUT_RESPONSE, LogoutResponsePacket.class);
+        packetMap.put(Command.CREATE_GROUP_REQ, CreateGroupReqPacket.class);
+        packetMap.put(Command.CREATE_GROUP_RESP, CreateGroupRespPacket.class);
+        packetMap.put(Command.SEND_GROUP_MESSAGE_REQ, SendGroupMessageReqPacket.class);
+        packetMap.put(Command.SEND_GROUP_MESSAGE_RESP, SendGroupMessageRespPacket.class);
     }
 
     /**
@@ -90,6 +91,5 @@ public class PacketCodeC {
         }
         return null;
     }
-
 
 }

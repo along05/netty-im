@@ -3,6 +3,7 @@ package com.along.netty.utils;
 import com.along.netty.attribute.Attributes;
 import com.along.netty.session.Session;
 import io.netty.channel.Channel;
+import io.netty.channel.group.ChannelGroup;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,6 +13,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2019-12-23
  */
 public class SessionUtils {
+
+    //维护群id和channel的关系
+    private static final Map<String , ChannelGroup> groupIdChannelMap = new ConcurrentHashMap<>() ;
 
     //维护用户id和对应channel
     private static final Map<String, Channel> userIdChannelMap = new ConcurrentHashMap<>();
@@ -42,5 +46,12 @@ public class SessionUtils {
         return userIdChannelMap.get(userId);
     }
 
+    public static void bindChannelGroup(String groupId, ChannelGroup channelGroup) {
+        groupIdChannelMap.put(groupId, channelGroup);
+    }
+
+    public static ChannelGroup getChannelGroup(String groupId) {
+        return groupIdChannelMap.get(groupId);
+    }
 
 }
