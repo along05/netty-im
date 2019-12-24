@@ -1,5 +1,10 @@
 package com.along.netty.server;
 
+import com.along.netty.codec.PacketCodecHandler;
+import com.along.netty.codec.PacketDecoder;
+import com.along.netty.codec.PacketEncoder;
+import com.along.netty.codec.Spliter;
+import com.along.netty.server.Handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -30,10 +35,27 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new ServerHandler());
+                        // ch.pipeline().addLast(new ServerHandler());
+                        ch.pipeline().addLast(new Spliter());
+                        //解码
+                        ch.pipeline().addLast(new PacketDecoder());
+                        //登陆
+                        ch.pipeline().addLast(new LoginReqHandler());
+                        //鉴权
+                        ch.pipeline().addLast(new AuthHandler());
+                        //退出登陆
+                        ch.pipeline().addLast(new LogoutReqHandler());
+                        //消息处理
+                        ch.pipeline().addLast(new SendMessageReqHandler());
+                        //创建群
+                        ch.pipeline().addLast(new CreateGroupReqHandler());
+                        //发群消息
+                        ch.pipeline().addLast(new SendGroupMessageReqHandler());
+                        //编码
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
-        bind(serverBootstrap ,PORT) ;
+        bind(serverBootstrap, PORT);
     }
 
     private static void bind(ServerBootstrap serverBootstrap, Integer port) {

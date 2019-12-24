@@ -20,7 +20,7 @@ import java.util.Map;
 public class PacketCodeC {
 
     //每8位二进制占一个字节，所以8位16进制=32位2进制，所以是4个字节
-    private static final int MAGIC_NUMBER = 0x12345678;
+    public static final int MAGIC_NUMBER = 0x12345678;
 
     public static final PacketCodeC INSTANCE = new PacketCodeC();
 

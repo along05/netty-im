@@ -25,7 +25,6 @@ public class SendGroupMessageConsoleCommand implements ConsoleCommand {
         sendGroupMessageReqPacket.setGroupId(groupId);
         sendGroupMessageReqPacket.setMessage(message);
 
-        ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc().ioBuffer(), sendGroupMessageReqPacket);
-        channel.writeAndFlush(byteBuf);
+        channel.writeAndFlush(sendGroupMessageReqPacket);
     }
 }

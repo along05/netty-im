@@ -15,8 +15,6 @@ public class LogoutConsoleCommand implements ConsoleCommand {
     @Override
     public void exec(Scanner scanner, Channel channel) {
         LogoutReqPacket logoutReqPacket = new LogoutReqPacket();
-        ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc().ioBuffer(), logoutReqPacket);
-
-        channel.writeAndFlush(byteBuf);
+        channel.writeAndFlush(logoutReqPacket);
     }
 }

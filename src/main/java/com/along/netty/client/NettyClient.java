@@ -3,6 +3,10 @@ package com.along.netty.client;
 
 import com.along.netty.client.console.ConsoleCommandManager;
 import com.along.netty.client.console.LoginConsoleCommand;
+import com.along.netty.client.handler.*;
+import com.along.netty.codec.PacketDecoder;
+import com.along.netty.codec.PacketEncoder;
+import com.along.netty.codec.Spliter;
 import com.along.netty.utils.SessionUtils;
 import com.sun.org.apache.regexp.internal.RE;
 import io.netty.bootstrap.Bootstrap;
@@ -41,8 +45,24 @@ public class NettyClient {
                 .option(ChannelOption.TCP_NODELAY, true)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline().addLast(new ClientHandler());
+                    protected void initChannel(SocketChannel ch) {
+                        //ch.pipeline().addLast(new ClientHandler());
+                        //拆包
+                        ch.pipeline().addLast(new Spliter());
+                        //解码
+                        ch.pipeline().addLast(new PacketDecoder());
+                        //登陆响应
+                        ch.pipeline().addLast(new LoginRespHandler());
+                        //退出登陆响应
+                        ch.pipeline().addLast(new LogoutRespHandler());
+                        //收消息响应
+                        ch.pipeline().addLast(new SendMessageRespHandler());
+                        //创建群聊响应
+                        ch.pipeline().addLast(new CreateGroupRespHandler());
+                        //群消息响应
+                        ch.pipeline().addLast(new SendGroupMessageRespHandler());
+                        //编码
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
         connect(bootstrap, HOST, PORT, MAX_RETRY);

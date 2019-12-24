@@ -24,7 +24,6 @@ public class SendToUserConsoleCommand implements ConsoleCommand {
         sendMessageReqPacket.setToUserId(toUserId);
         sendMessageReqPacket.setMessage(message);
 
-        ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc().ioBuffer(), sendMessageReqPacket);
-        channel.writeAndFlush(byteBuf);
+        channel.writeAndFlush(sendMessageReqPacket);
     }
 }

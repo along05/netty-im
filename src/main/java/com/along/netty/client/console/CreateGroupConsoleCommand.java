@@ -22,7 +22,6 @@ public class CreateGroupConsoleCommand implements ConsoleCommand{
         CreateGroupReqPacket createGroupReqPacket = new CreateGroupReqPacket();
         createGroupReqPacket.setUserIdList(Arrays.asList(userIds.split(",")));
 
-        ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc().ioBuffer() , createGroupReqPacket);
-        channel.writeAndFlush(byteBuf) ;
+        channel.writeAndFlush(createGroupReqPacket) ;
     }
 }

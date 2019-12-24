@@ -21,8 +21,7 @@ public class LoginConsoleCommand implements ConsoleCommand {
         loginReqPacket.setUserName(scanner.nextLine());
         loginReqPacket.setPassword("123456");
 
-        ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc().ioBuffer() , loginReqPacket);
-        channel.writeAndFlush(byteBuf) ;
+        channel.writeAndFlush(loginReqPacket) ;
         waitForLoginResponse();
     }
 
