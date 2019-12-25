@@ -18,6 +18,7 @@ public class SessionUtils {
 
     public static void bindLogin(Session session , Channel channel){
         channel.attr(Attributes.SESSION).set(session) ;
+        userIdChannelMap.put(session.getUserId() , channel) ;
     }
 
     public static boolean hasLogin(Channel channel){
