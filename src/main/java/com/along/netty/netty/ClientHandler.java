@@ -15,20 +15,15 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        //1.获取数据
-        ByteBuf byteBuf = getByteBuf(ctx) ;
+        for (int i = 0; i < 1000; i++) {
+            //1.获取数据
+            ByteBuf byteBuf = getByteBuf(ctx) ;
 
-        //2.写数据
-        ctx.channel().writeAndFlush(byteBuf) ;
+            //2.写数据
+            ctx.channel().writeAndFlush(byteBuf) ;
+        }
     }
 
-
-    @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        //read方法监听数据
-        ByteBuf byteBuf = (ByteBuf) msg ;
-        System.out.println("[来自服务端]:" + byteBuf.toString(Charset.forName("utf-8")));
-    }
 
     private ByteBuf getByteBuf(ChannelHandlerContext ctx) {
 
@@ -36,7 +31,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         ByteBuf buffer = ctx.alloc().buffer();
 
         //准备数据，指定utf-8
-        byte[] bytes = "你好，我是客户端".getBytes(Charset.forName("utf-8"));
+        byte[] bytes = "这里是客户端，我说会有粘包的情况，他们不信~".getBytes(Charset.forName("utf-8"));
 
         //3.填充数据到 ByteBuf
         buffer.writeBytes(bytes);
