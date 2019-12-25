@@ -12,6 +12,7 @@ import java.nio.charset.Charset;
  */
 public class ClientHandler extends ChannelInboundHandlerAdapter {
 
+
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //1.获取数据

@@ -21,6 +21,27 @@ import java.util.concurrent.TimeUnit;
  */
 public class NettyServer {
 
+    /**
+     * .group()
+     * 一个用于接收连接， 一个用于处理已经接收的连接
+     *
+     * .channel()
+     * 指定了io和nio
+     *
+     * option()
+     * 指定服务端tcp连接的一些属性
+     *
+     * .childOption() 方法
+     * 可以给每条连接设置一些TCP底层相关的属性
+     * ChannelOption.SO_KEEPALIVE表示是否开启TCP底层心跳机制，true为开启
+     * ChannelOption.TCP_NODELAY表示是否开启Nagle算法，true表示关闭，false表示开启，通俗地说，如果要求高实时性，有数据发送时就马上发送，就关闭，如果需要减少发送次数减少网络交互，就开启。
+     *
+     * childHandler()
+     * 具体处理连接上的业务逻辑
+     *
+     */
+
+
     private static final int PORT = 8000;
 
     public static void main(String[] args) {
