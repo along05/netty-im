@@ -19,7 +19,7 @@ public class SendMessageReqHandler extends SimpleChannelInboundHandler<SendMessa
     public static final SendMessageReqHandler INSTANCE = new SendMessageReqHandler();
 
     private SendMessageReqHandler() {}
-
+    
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, SendMessageReqPacket sendMessageReqPacket) {
         SendMessageRespPacket sendMessageRespPacket = new SendMessageRespPacket();
@@ -36,4 +36,5 @@ public class SendMessageReqHandler extends SimpleChannelInboundHandler<SendMessa
             System.out.println("要发送消息的人不在线");
         }
     }
+
 }
