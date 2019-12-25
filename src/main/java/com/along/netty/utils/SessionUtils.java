@@ -17,7 +17,6 @@ public class SessionUtils {
     private static final Map<String, Channel> userIdChannelMap = new ConcurrentHashMap<>();
 
     public static void bindLogin(Session session , Channel channel){
-        userIdChannelMap.put(session.getUserId() , channel) ;
         channel.attr(Attributes.SESSION).set(session) ;
     }
 

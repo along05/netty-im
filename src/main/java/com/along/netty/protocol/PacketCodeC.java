@@ -42,11 +42,11 @@ public class PacketCodeC {
         packetMap.put(Command.SEND_MESSAGE_REQUEST, SendMessageReqPacket.class);
         packetMap.put(Command.SEND_MESSAGE_RESPONSE, SendMessageRespPacket.class);
         packetMap.put(Command.LOGOUT_REQUEST, LogoutReqPacket.class);
-        packetMap.put(Command.LOGIN_RESPONSE, LoginRespPacket.class);
     }
 
     /**
-     * 按照协议编码
+     * 把对象放入bytebuf
+     * 按照协议编码  -- 魔数值 + 版本 + 序列化算法 + 指令 + 数据长度 + 数据
      */
     public ByteBuf encode(ByteBuf buf, Packet packet) {
 
@@ -64,6 +64,9 @@ public class PacketCodeC {
         return buf;
     }
 
+    /**
+     * 把byte转为对象
+     */
     public Packet decode(ByteBuf byteBuf) {
         //跳过魔数值
         byteBuf.skipBytes(4) ;

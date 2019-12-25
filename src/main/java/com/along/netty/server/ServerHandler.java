@@ -30,9 +30,12 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
         //处理登陆
         if (packet instanceof LoginReqPacket) {
+
+            LoginReqPacket loginReqPacket = (LoginReqPacket) packet;
+
             LoginRespPacket loginRespPacket = new LoginRespPacket();
-            loginRespPacket.setSuccess(vailLogin((LoginReqPacket) packet));
-            loginRespPacket.setUsername(((LoginReqPacket) packet).getUserName());
+            loginRespPacket.setSuccess(vailLogin(loginReqPacket));
+            loginRespPacket.setUsername(loginReqPacket.getUserName());
             loginRespPacket.setUserId(IDUtils.getUserId());
             loginRespPacket.setReason("登陆成功");
 
