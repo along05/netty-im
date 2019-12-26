@@ -50,6 +50,7 @@ public class NettyServer {
                         ch.pipeline().addLast(CreateGroupReqHandler.INSTANCE);
                         //发群消息
                         ch.pipeline().addLast(SendGroupMessageReqHandler.INSTANCE);
+                        System.out.println("111");
                     }
                 });
         bind(serverBootstrap, PORT);
