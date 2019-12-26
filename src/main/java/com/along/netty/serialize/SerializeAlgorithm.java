@@ -7,4 +7,6 @@ package com.along.netty.serialize;
 public interface SerializeAlgorithm {
 
     byte JSON = 1 ;
+
+    byte PRO = 2 ;
 }

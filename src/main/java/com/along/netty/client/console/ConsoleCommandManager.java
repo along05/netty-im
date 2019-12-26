@@ -20,6 +20,7 @@ public class ConsoleCommandManager implements ConsoleCommand {
         consoleCommandMap.put("login", new LoginConsoleCommand());
         consoleCommandMap.put("logout", new LogoutConsoleCommand());
         consoleCommandMap.put("sendToUser", new SendToUserConsoleCommand());
+
     }
 
     @Override
