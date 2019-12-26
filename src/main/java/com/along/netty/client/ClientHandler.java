@@ -2,8 +2,6 @@ package com.along.netty.client;
 
 import com.along.netty.protocol.Packet;
 import com.along.netty.protocol.PacketCodeC;
-import com.along.netty.protocol.request.CreateGroupReqPacket;
-import com.along.netty.protocol.request.LoginReqPacket;
 import com.along.netty.protocol.response.*;
 import com.along.netty.session.Session;
 import com.along.netty.utils.SessionUtils;
@@ -11,7 +9,6 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import java.util.Scanner;
 
 /**
  * @author huanglong
