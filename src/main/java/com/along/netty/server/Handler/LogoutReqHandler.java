@@ -28,7 +28,6 @@ public class LogoutReqHandler extends SimpleChannelInboundHandler<LogoutReqPacke
         ctx.channel().writeAndFlush(logoutResponsePacket);
     }
 
-
     private boolean bindLogin(LogoutReqPacket logoutReqPacket) {
         return true;
     }

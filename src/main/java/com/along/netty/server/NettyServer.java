@@ -36,7 +36,7 @@ public class NettyServer {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
                         ch.pipeline().addLast(new Spliter());
-                        //解码+编码
+                        // 解码 + 编码
                         ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
                         //登陆
                         ch.pipeline().addLast(LoginReqHandler.INSTANCE);
