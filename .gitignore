@@ -109,3 +109,9 @@ blog/
 flash-netty.iml
 target/
 test/
+*.iml
+/RollingFiles/
+/target/
+/logs/
+.DS_Store
+*/.DS_Store
